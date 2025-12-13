@@ -1,0 +1,10 @@
+timestamp,station,train_present,co2_ppm,pm2_5_ugm3,tvoc_ppb,temperature_c
+16:00,TimesSq,0,610,10,95,22.1
+16:01,TimesSq,0,620,11,100,22.1
+16:02,TimesSq,1,740,18,145,22.6
+16:03,TimesSq,1,790,21,170,22.8
+16:04,TimesSq,1,810,23,180,23.0
+16:05,TimesSq,0,700,15,130,22.5
+16:06,TimesSq,0,600,10,100,22.0
+16:07,TimesSq,0,500,10,100,22.0
+16:08,TimesSq,0,400,10,100,22.0
