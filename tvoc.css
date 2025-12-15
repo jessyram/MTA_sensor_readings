@@ -1,1 +1,17 @@
+/* File Name: temp.css
+Author: Daniel Sanchez*/
 
+/* Chart Styling. Feel free to change anything. */
+
+.chart-box {
+    width: 520px; /* controls chart width */
+    height: 260px;  /* controls chart height */
+    padding: 1rem;
+    border-radius: 12px;
+  }
+  
+  /* Make canvas fill the box */
+  .chart-box canvas {
+    width: 100% !important;
+    height: 100% !important;
+  }
