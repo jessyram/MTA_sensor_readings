@@ -1,1 +1,50 @@
+<!--File Name: tvoc.html
+Author: Daniel Sanchez -->
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TVOC Sensor Data</title>
+
+  <!-- Shared styles (navbar, background, fonts). Can remove depending on the 
+   style you want -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- TVOC page-specific styles  -->
+  <link rel="stylesheet" href="tvoc.css">
+
+  <!-- Chart.js is a JavaScript library that draws graphs for you -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+  <!-- Navigation Bar (same as index.html) -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <a href="index.html">home</a>
+      <a href="co2.html">CO₂</a>
+      <a href="pm.html">PM</a>
+      <a href="tvoc.html">TVOC</a>
+      <a href="temp.html">Temp</a>
+    </div>
+  </nav>
+
+  <!-- Page Title -->
+  <h1>TVOC Levels in NYC Subway Stations</h1>
+
+  <!-- TVOC Graph Section -->
+  <div class="chart-box">
+    <canvas id="tvocChart"></canvas>
+  </div>
+  
+
+  <!-- TVOC graph logic -->
+  <script src="tvoc.js"></script>
+
+
+</body>
+</html>
