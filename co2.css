@@ -1,51 +1,20 @@
-<!--File Name: co2.html
-Author: Dennis Lee -->
+/* File Name: co2.css
+Author: Dennis Lee*/
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CO2 Sensor Data</title>
 
-  <!-- Shared styles (navbar, background, fonts). Can remove depending on the 
-   style you want -->
-  <link rel="stylesheet" href="style.css">
+/* Chart Styling. Feel free to change anything */
 
-  <!-- Co2 page-specific styles  -->
-  <link rel="stylesheet" href="co2.css">
-
-  <!-- Chart.js is a JavaScript library that draws graphs for you -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-</head>
-
-<body>
-
-  <!-- Navigation Bar (same as index.html) -->
-  <nav class="navbar">
-    <div class="nav-left">
-      <a href="index.html">home</a>
-      <a href="co2.html">CO₂</a>
-      <a href="pm.html">PM</a>
-      <a href="tvoc.html">TVOC</a>
-      <a href="temp.html">Temp</a>
-    </div>
-  </nav>
-
-  <!-- Page Title -->
-  <h1>CO2 Levels in NYC Subway Stations</h1>
-
-  <!-- CO2 Graph Section -->
-  <div class="chart-box">
-    <canvas id="co2Chart"></canvas>
-  </div>
+.chart-box {
+    width: 520px; /* controls chart width */
+    height: 260px;  /* controls chart height */
+    padding: 1rem;
+    border-radius: 12px;
+  }
   
-
-  <!-- CO2 graph logic -->
-  <script src="co2.js"></script>
-
-
-</body>
-</html>
+  /* Make canvas fill the box */
+  .chart-box canvas {
+    width: 100% !important;
+    height: 100% !important;
+  }
+  
 
