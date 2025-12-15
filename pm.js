@@ -71,6 +71,10 @@ function drawPMGraph(times, pmValues, eventPoints) {
       options: {
         responsive: true,
         plugins: {
+            title: {
+                display: true,
+                text: "PM Readings with Train Arrivals and Departures"
+              },
           tooltip: {
             callbacks: {
               label: (context) =>
