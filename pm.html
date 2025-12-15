@@ -1,1 +1,47 @@
+<!--File Name: pm.html
+Author: Veronica Nieto-Wire-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PM2.5 Sensor Data</title>
+
+  <!-- Shared styles -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- PM page-specific styles -->
+  <link rel="stylesheet" href="pm.css">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <a href="index.html">home</a>
+      <a href="co2.html">CO₂</a>
+      <a href="pm.html">PM</a>
+      <a href="tvoc.html">TVOC</a>
+      <a href="temp.html">Temp</a>
+    </div>
+  </nav>
+
+   <!-- Page Title -->
+  <h1>PM2.5 Levels in NYC Subway Stations</h1>
+
+  <!-- PM Graph Section -->
+  <div class="chart-box">
+    <canvas id="pmChart"></canvas>
+  </div>
+  <!-- PM graph logic -->
+  <script src="pm.js"></script>
+
+</body>
+</html>
+
 
