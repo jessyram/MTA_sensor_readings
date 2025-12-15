@@ -1,9 +1,37 @@
-<!-- Homepage: This is the first page people see.
+<!--This is the homepage -->
 
-Contents:
--Has a short description of what the page is about.
--Upload CSV button.
--Team members names.
--Navigation bar.
+<!DOCTYPE html> <!--imports the latest version of html-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8"> <!-- include a character set -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- scaling for device-->
+    <title>MTA Air Quality Dashboard</title>
+    <link rel="stylesheet" href="style.css">
 
--->
+</head>
+
+
+<body>
+    <h1> MTA Air Quality Dashboard</h1>
+
+    <!-- Navigation Bar-->
+     <nav class = "navbar"></nav>
+     <div class = "nav-left">
+        <a href = "index.html"> home</a>
+        <a href = "co2.html">CO2</a>
+        <a href = "pm.html">pm</a>
+        <a href = "tvoc.html">tvoc</a>
+        <a href = "temp.html">temp</a>
+     </div>
+    </nav>
+
+    <p class = "description">
+        Data collected from CO2, PM, TVOC, and gas sensors from the NYC subway stations 
+    </p>
+    <input type = "file" id="csvFile" accept=".csv";>
+
+    <p id="fileStatus"></p>
+     </body>
+
+
+</html>
