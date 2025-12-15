@@ -1,6 +1,7 @@
 /* File Name: cos2.js
 Author: Dennis Lee */
 
+
 //Graph Settings
 
 const storedData = localStorage.getItem("sensorData");
@@ -71,6 +72,10 @@ function drawCO2Graph(times, co2Values, eventPoints) {
     options: {
       responsive: true,
       plugins: {
+        title: {
+            display: true,
+            text: "CO2 Readings with Train Arrivals and Departures"
+          },
         tooltip: {
           callbacks: {
             label: function (context) {
@@ -99,5 +104,7 @@ function drawCO2Graph(times, co2Values, eventPoints) {
     }
   });
 }
+
+
 
 
