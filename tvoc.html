@@ -1,28 +1,18 @@
-<!--File Name: tvoc.html
-Author: Daniel Sanchez -->
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TVOC Sensor Data</title>
+  <title>PM2.5 Sensor Data</title>
 
-  <!-- Shared styles (navbar, background, fonts). Can remove depending on the 
-   style you want -->
-  <link rel="stylesheet" href="style.css">
-
-  <!-- TVOC page-specific styles  -->
-  <link rel="stylesheet" href="tvoc.css">
-
-  <!-- Chart.js is a JavaScript library that draws graphs for you -->
+  <link rel="stylesheet" href="style.css"> 
+  <link rel="stylesheet" href="co2.css">   
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 </head>
 
 <body>
 
-  <!-- Navigation Bar (same as index.html) -->
   <nav class="navbar">
     <div class="nav-left">
       <a href="index.html">home</a>
@@ -33,18 +23,84 @@ Author: Daniel Sanchez -->
     </div>
   </nav>
 
-  <!-- Page Title -->
-  <h1>TVOC Levels in NYC Subway Stations</h1>
+  <h1>PM2.5 Levels in NYC Subway Stations</h1>
 
-  <!-- TVOC Graph Section -->
-  <div class="chart-box">
-    <canvas id="tvocChart"></canvas>
+  <div style="text-align: center; margin-bottom: 20px;">
+      <p>Upload your <strong>log.txt</strong> file here:</p>
+      <input type="file" id="csvFile" accept=".csv, .txt">
   </div>
-  
 
-  <!-- TVOC graph logic -->
-  <script src="tvoc.js"></script>
+  <div class="dashboard-container">
+    
+    <div class="grid-item chart-area">
+      <h2>Particulate Matter PM<sub>2.5</sub></h2>
+      <div class="chart-wrapper">
+        <canvas id="co2Chart"></canvas>
+      </div>
+    </div>
 
+    <div class="grid-item info-box green-box" onclick="openModal('modal-whatis')">
+      <h3>What is PM<sub>2.5</sub>?</h3>
+      <p>Click to read about health risks of PM<sub>2.5</sub>.</p>
+    </div>
+
+    <div class="grid-item info-box green-box" onclick="openModal('modal-safety')">
+      <h3>Safety Concerns of PM<sub>2.5</sub></h3>
+      <p>Click to view the health effects.</p>
+    </div>
+
+    <div class="grid-item info-box yellow-box" onclick="openModal('modal-analysis')">
+      <h3>Analysis of Real Time PM<sub>2.5</sub> Data</h3>
+      <p>Click to see data insights from the station.</p>
+    </div>
+
+    <div class="grid-item info-box yellow-box" onclick="openModal('modal-tech')">
+      <h3>Technical Analysis of Data Acquisition</h3>
+      <p>Click for technical sensor details.</p>
+    </div>
+
+  </div>
+
+  <div id="modal-overlay" class="modal-overlay" onclick="closeModal()"></div>
+
+  <div id="modal-whatis" class="modal">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <h2>What is PM<sub>2.5</sub>?</h2>
+    <p>PM2.5 refers to particles 2.5 micrometers or smaller in diameter, so small that they can enter your lungs, or bloodstream and cause serious health issues including cardiovascular, neurological, and respiratory effects.</p>
+  </div>
+
+  <div id="modal-safety" class="modal">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <h2>Safety Levels of PM<sub>2.5</sub></h2>
+    <p>World Health Organization (WHO) guidelines say to not exceed exposure higher than 15 ug/m^3</p>
+    <table class="styled-table">
+      <thead>
+        <tr><th>PM Level 15µg/m3</th><th>Impact</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>350-400</td><td>Excellent</td></tr>
+        <tr><td>450-1,000</td><td>Good</td></tr>
+        <tr><td>1,000-2,000</td><td>Poor</td></tr>
+        <tr><td>&gt;2,000</td><td>Very Poor</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div id="modal-analysis" class="modal">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <h2>Analysis</h2>
+    <p><strong>Station:</strong> TimesSq</p>
+    <p>The graph shows a clear correlation between train presence and rising CO₂ levels.</p>
+  </div>
+
+  <div id="modal-tech" class="modal">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <h2>Technical Analysis</h2>
+    <p><strong>Sensor Used:</strong> SCD4x</p>
+    <p><strong>Sampling Rate:</strong> 1 measurement per second.</p>
+  </div>
+
+  <script src="co2.js"></script>
 
 </body>
 </html>
