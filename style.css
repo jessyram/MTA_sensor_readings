@@ -1,25 +1,81 @@
 /* this is a comment */
 
+
+  
 body {
     margin: 0; /* regular spacing*/
+    padding-top: 70px;
     font-family: Monospace, Arial, Helvetica, sans-serif;
-    background-color: #C4EBF1;
+    background-color: #c5ecf1;
     color:black;
 }
 
-.navbar {
-    background-color:aliceblue;
+h1 {
+    margin: 2rem;
+  }
+  
+
+.hero-image {
+    position: absolute;
+    top: 70px;
+    right: 180px;
+    width: 500px;
+    height: 300px;
 }
+
+
+.navbar {
+    position: fixed;     /* sticks it to the top */
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #afd3d8;
+    padding: 0.5rem 0;
+    z-index: 1000;
+}
+.nav-links {
+    display: flex;
+    justify-content: space-around; /* spreads links */
+    align-items: center;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .dashboard-card {
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .dashboard-card h3 {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 1rem;
+  }
+  
+  .dashboard-card canvas {
+    flex: 1;
+  }
+  
+
 
 .nav-left a{ /* a stands for anchor. it allows user to follow a link*/
     color: #000;
     font-weight: bold;
 }
 
-h1 {
-    margin: 2.5rem;
-    font-size: 2.5rem;
-}
+
 
 .description {
     margin: 2rem;
