@@ -1,101 +1,96 @@
-/* File Name: temp.js
-Author: Veronica Nieto-Wire */
+/* File Name: temp.js */
 
-//Graph settings
-   const storedData = localStorage.getItem("sensorData");
+// 1. Listen for File Upload
+document.addEventListener('DOMContentLoaded', () => {
+  const fileInput = document.getElementById('csvFile');
 
-   if (!storedData) {
-     alert("No data found. Please upload a CSV on the home page first.");
-   } else {
-     const data = JSON.parse(storedData);
-   
-     const times = [];
-     const tempValues = [];
-     const eventPoints = [];
-   
-     for (let i = 0; i < data.length; i++) {
-       const row = data[i];
-   
-       times.push(row.timestamp);
-       tempValues.push(Number(row.temperature_c));
-   
-       // Detect train arrival/departure
-       if (i > 0) {
-         const prev = data[i - 1].train_present;
-         const curr = row.train_present;
-   
-         if (prev === "0" && curr === "1") {
-           eventPoints.push({
-             x: row.timestamp,
-             y: Number(row.temperature_c),
-             event: "Train Arrives the Station"
-           });
-         }
-   
-         if (prev === "1" && curr === "0") {
-           eventPoints.push({
-             x: row.timestamp,
-             y: Number(row.temperature_c),
-             event: "Train Leaves the Station"
-           });
-         }
-       }
-     }
-   
-     drawTempGraph(times, tempValues, eventPoints);
-   }
-   
-   function drawTempGraph(times, tempValues, eventPoints) {
-     const ctx = document.getElementById("tempChart").getContext("2d");
-   
-     new Chart(ctx, {
-       type: "line",
-       data: {
-         labels: times,
-         datasets: [
-           {
-             label: "Temperature (°C)",
-             data: tempValues,
-             borderWidth: 2,
-             pointRadius: 3
-           },
-           {
-             label: "Train Event",
-             data: eventPoints,
-             parsing: false,
-             type: "scatter",
-             pointRadius: 6
-           }
-         ]
-       },
-       options: {
-         responsive: true,
-         plugins: {
-            title: {
-                display: true,
-                text: "Temperature Readings with Train Arrivals and Departures"
-              },
-           tooltip: {
-             callbacks: {
-               label: function (context) {
-                 if (context.raw.event) {
-                   return context.raw.event;
-                 }
-                 return `Temperature: ${context.parsed.y} °C`;
-               }
-             }
-           }
-         },
-         scales: {
-           x: {
-             title: { display: true, text: "Time" }
-           },
-           y: {
-             title: { display: true, text: "Temperature (°C)" },
-             min: 20,
-             max: 25
-           }
-         }
-       }
-     });
-   }
+  if (fileInput) {
+    fileInput.addEventListener('change', function (e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const text = e.target.result;
+        processCSV(text);
+      };
+      reader.readAsText(file);
+    });
+  }
+});
+
+// 2. Process CSV for Temperature
+function processCSV(csvText) {
+  const rows = csvText.split('\n');
+  const timeLabels = [];
+  const tempValues = [];
+
+  for (let i = 1; i < rows.length; i++) {
+    const row = rows[i].trim();
+    if (!row) continue;
+
+    const cols = row.split(',');
+
+    // Col 0: time (ms)
+    // Col 3: Temperature (°F)
+
+    if (cols.length > 3) {
+      const seconds = (parseFloat(cols[0]) / 1000).toFixed(1);
+      timeLabels.push(seconds);
+      tempValues.push(parseFloat(cols[3]));
+    }
+  }
+
+  drawTempGraph(timeLabels, tempValues);
+}
+
+// 3. Draw Temperature Graph
+function drawTempGraph(times, tempValues) {
+  const canvas = document.getElementById("tempChart");
+  const ctx = canvas.getContext("2d");
+
+  if (window.myTempChart) window.myTempChart.destroy();
+
+  window.myTempChart = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: times,
+      datasets: [
+        {
+          label: "Temperature (°F)",
+          data: tempValues,
+          borderColor: "#1976d2",
+          backgroundColor: "rgba(25,118,210,0.2)",
+          borderWidth: 2,
+          pointRadius: 0,
+          fill: true,
+          tension: 0.1
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: false,
+      scales: {
+        x: {
+          title: { display: true, text: "Time (seconds)" }
+        },
+        y: {
+          title: { display: true, text: "Temperature (°F)" }
+        }
+      }
+    }
+  });
+}
+
+// --- Modal Logic ---
+function openModal(id) {
+  document.getElementById("modal-overlay").style.display = "block";
+  document.getElementById(id).style.display = "block";
+}
+
+function closeModal() {
+  document.getElementById("modal-overlay").style.display = "none";
+  document.querySelectorAll('.modal').forEach(m => m.style.display = "none");
+}
