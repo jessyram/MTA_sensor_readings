@@ -13,17 +13,18 @@
 
 <body>
 
-  <nav class="navbar">
-    <div class="nav-left">
-      <a href="index.html">home</a>
-      <a href="co2.html">CO₂</a>
+      <!-- Navigation Bar -->
+<nav class="navbar">
+  <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="co2.html">CO2</a>
       <a href="pm.html">PM</a>
       <a href="tvoc.html">TVOC</a>
       <a href="temp.html">Temp</a>
-    </div>
-  </nav>
+  </div>
+</nav>
 
-  <h1>PM2.5 Levels in NYC Subway Stations</h1>
+  <h1>TVOC Levels in NYC Subway Stations</h1>
 
   <div style="text-align: center; margin-bottom: 20px;">
       <p>Upload your <strong>log.txt</strong> file here:</p>
@@ -33,14 +34,14 @@
   <div class="dashboard-container">
     
     <div class="grid-item chart-area">
-      <h2>Particulate Matter PM<sub>2.5</sub></h2>
+      <h2>TVOC Levels</sub></h2>
       <div class="chart-wrapper">
-        <canvas id="co2Chart"></canvas>
+        <canvas id="tvocChart"></canvas>
       </div>
     </div>
 
     <div class="grid-item info-box green-box" onclick="openModal('modal-whatis')">
-      <h3>What is PM<sub>2.5</sub>?</h3>
+      <h3>What is TVOC?</h3>
       <p>Click to read about health risks of PM<sub>2.5</sub>.</p>
     </div>
 
@@ -50,7 +51,7 @@
     </div>
 
     <div class="grid-item info-box yellow-box" onclick="openModal('modal-analysis')">
-      <h3>Analysis of Real Time PM<sub>2.5</sub> Data</h3>
+      <h3>Analysis of Real Time TVOC<sub>2.5</sub> Data</h3>
       <p>Click to see data insights from the station.</p>
     </div>
 
@@ -100,7 +101,8 @@
     <p><strong>Sampling Rate:</strong> 1 measurement per second.</p>
   </div>
 
-  <script src="co2.js"></script>
+  <script src="tvoc.js"></script>
 
 </body>
 </html>
+
