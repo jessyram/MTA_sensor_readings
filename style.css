@@ -49,24 +49,22 @@ h1 {
   }
   
   .dashboard-card {
-    background: #ffffff;
-    border-radius: 15px;
+    background: white;
+    border-radius: 12px;
     padding: 15px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    height: 300px;
+    height: 280px;
     display: flex;
     flex-direction: column;
-  }
-  
-  .dashboard-card h3 {
-    text-align: center;
-    margin-bottom: 10px;
-    font-size: 1rem;
+    min-height: 0;          
   }
   
   .dashboard-card canvas {
     flex: 1;
+    min-height: 0;         
+    width: 100%;
   }
+  
+  
   
 
 
