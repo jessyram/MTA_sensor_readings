@@ -42,16 +42,16 @@
 
     <div class="grid-item info-box green-box" onclick="openModal('modal-whatis')">
       <h3>What is TVOC?</h3>
-      <p>Click to read about health risks of PM<sub>2.5</sub>.</p>
+      <p>Click to read about health risks of TVOC.</p>
     </div>
 
     <div class="grid-item info-box green-box" onclick="openModal('modal-safety')">
-      <h3>Safety Concerns of PM<sub>2.5</sub></h3>
-      <p>Click to view the health effects.</p>
+      <h3>Safety Concerns of TVOC</h3>
+      <p>Click to view levels of exposure rated Acceptable to High Concern</p>
     </div>
 
     <div class="grid-item info-box yellow-box" onclick="openModal('modal-analysis')">
-      <h3>Analysis of Real Time TVOC<sub>2.5</sub> Data</h3>
+      <h3>Analysis of Real Time TVOC Data</h3>
       <p>Click to see data insights from the station.</p>
     </div>
 
@@ -66,23 +66,24 @@
 
   <div id="modal-whatis" class="modal">
     <span class="close-btn" onclick="closeModal()">&times;</span>
-    <h2>What is PM<sub>2.5</sub>?</h2>
-    <p>PM2.5 refers to particles 2.5 micrometers or smaller in diameter, so small that they can enter your lungs, or bloodstream and cause serious health issues including cardiovascular, neurological, and respiratory effects.</p>
+    <h2>What is TVOC</h2>
+    <p>Total Volatile Organic Compounds (TVOC) is measurement of combined concentration of many different VOCs in a space; VOCs are gases from everyday items such as cleaning products, humans' exhaled breaths and personal care products, paints, varnishes, cleaning supplies, & construction materials. Levels above 2,200 ppb are extremely unhealthy and can lead to loss of coordination, liver/kidney damage, and short term effects can include fatigue and headaches.
+</p>
   </div>
 
   <div id="modal-safety" class="modal">
     <span class="close-btn" onclick="closeModal()">&times;</span>
-    <h2>Safety Levels of PM<sub>2.5</sub></h2>
-    <p>World Health Organization (WHO) guidelines say to not exceed exposure higher than 15 ug/m^3</p>
+    <h2>Level of Exposure Rated Acceptable to Very High Concern</h2>
+    <p>Measured in parts per billion (ppb)</p>
     <table class="styled-table">
       <thead>
-        <tr><th>PM Level 15µg/m3</th><th>Impact</th></tr>
+        <tr><th>Exposure level (ppb)</th><th>Impact</th></tr>
       </thead>
       <tbody>
-        <tr><td>350-400</td><td>Excellent</td></tr>
-        <tr><td>450-1,000</td><td>Good</td></tr>
-        <tr><td>1,000-2,000</td><td>Poor</td></tr>
-        <tr><td>&gt;2,000</td><td>Very Poor</td></tr>
+        <tr><td> less than 400 </td><td>Low Concern/Acceptable</td></tr>
+        <tr><td>400 - 2,200</td><td>Moderate Concern</td></tr>
+        <tr><td>2,200 - 30,000</td><td>Unhealthy/ High Concern</td></tr>
+        <tr><td>&gt;3,000</td><td>Very High Concern</td></tr>
       </tbody>
     </table>
   </div>
