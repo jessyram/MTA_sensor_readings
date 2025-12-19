@@ -1,74 +1,121 @@
 //JS for dashboard
 
-document.addEventListener("DOMContentLoaded", () => {
-    const input = document.getElementById("csvFile");
-    input.addEventListener("change", handleFile);
+/* ========= LIVE ESP32 DASHBOARD SCRIPT ========= */
+
+let co2Chart, pmChart, tvocChart, tempChart;
+
+// Data buffers
+const maxPoints = 60;
+const timeData = [];
+const co2Data = [];
+const pm25Data = [];
+const tvocData = [];
+const tempData = [];
+
+/* ========= CREATE CHARTS ========= */
+function initCharts() {
+  co2Chart = new Chart(document.getElementById("co2Chart"), {
+    type: "line",
+    data: { labels: [], datasets: [{
+      label: "CO2 (ppm)",
+      data: [],
+      borderColor: "teal",
+      fill: false,
+      tension: 0.1
+    }]},
+    options: { responsive: true, animation: false }
   });
-  
-  function handleFile(e) {
-    const file = e.target.files[0];
-    if (!file) return;
-  
-    const reader = new FileReader();
-    reader.onload = () => parseCSV(reader.result);
-    reader.readAsText(file);
-  
-    document.getElementById("fileStatus").textContent = "File loaded successfully";
+
+  pmChart = new Chart(document.getElementById("pmChart"), {
+    type: "line",
+    data: { labels: [], datasets: [{
+      label: "PM2.5 (µg/m³)",
+      data: [],
+      borderColor: "orange",
+      fill: false,
+      tension: 0.1
+    }]},
+    options: { responsive: true, animation: false }
+  });
+
+  tvocChart = new Chart(document.getElementById("tvocChart"), {
+    type: "line",
+    data: { labels: [], datasets: [{
+      label: "TVOC Index",
+      data: [],
+      borderColor: "purple",
+      fill: false,
+      tension: 0.1
+    }]},
+    options: { responsive: true, animation: false }
+  });
+
+  tempChart = new Chart(document.getElementById("tempChart"), {
+    type: "line",
+    data: { labels: [], datasets: [{
+      label: "Temperature (°F)",
+      data: [],
+      borderColor: "red",
+      fill: false,
+      tension: 0.1
+    }]},
+    options: { responsive: true, animation: false }
+  });
+}
+
+/* ========= FETCH LIVE DATA ========= */
+async function fetchLiveData() {
+  try {
+    const res = await fetch("/data");
+    const d = await res.json();
+
+    if (!d || !d.co2) return;
+
+    const t = (d.t_ms / 1000).toFixed(1);
+
+    timeData.push(t);
+    co2Data.push(d.co2);
+    pm25Data.push(d.pm25);
+    tvocData.push(d.tvoc);
+    tempData.push(d.temp);
+
+    if (timeData.length > maxPoints) {
+      timeData.shift();
+      co2Data.shift();
+      pm25Data.shift();
+      tvocData.shift();
+      tempData.shift();
+    }
+
+    updateCharts();
+  } catch (err) {
+    console.error("ESP32 fetch failed", err);
   }
-  
-  function parseCSV(text) {
-    const rows = text.split("\n").slice(1);
-  
-    const time = [];
-    const co2 = [];
-    const pm25 = [];
-    const tvoc = [];
-    const temp = [];
-  
-    rows.forEach(row => {
-      const cols = row.trim().split(",");
-      if (cols.length < 7) return;
-  
-      time.push((cols[0] / 1000).toFixed(1));
-      co2.push(+cols[1]);
-      tvoc.push(+cols[2]);
-      temp.push(+cols[3]);
-      pm25.push(+cols[6]);
-    });
-  
-    drawChart("co2Chart", "CO₂ (ppm)", co2, "#00796b");
-    drawChart("pmChart", "PM2.5 (µg/m³)", pm25, "#ef6c00");
-    drawChart("tvocChart", "TVOC Index", tvoc, "#7b1fa2");
-    drawChart("tempChart", "Temperature (°F)", temp, "#1976d2");
-  }
-  
-  function drawChart(id, label, data, color) {
-    const ctx = document.getElementById(id).getContext("2d");
-  
-    new Chart(ctx, {
-      type: "line",
-      data: {
-        labels: data.map((_, i) => i),
-        datasets: [{
-          label,
-          data,
-          borderColor: color,
-          backgroundColor: color + "33",
-          pointRadius: 0,
-          fill: true,
-          tension: 0.2
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        animation: false,
-        plugins: { legend: { display: false } },
-        scales: {
-          x: { display: false },
-          y: { beginAtZero: false }
-        }
-      }
-    });
-  }
+}
+
+/* ========= UPDATE CHARTS ========= */
+function updateCharts() {
+  co2Chart.data.labels = timeData;
+  co2Chart.data.datasets[0].data = co2Data;
+  co2Chart.update();
+
+  pmChart.data.labels = timeData;
+  pmChart.data.datasets[0].data = pm25Data;
+  pmChart.update();
+
+  tvocChart.data.labels = timeData;
+  tvocChart.data.datasets[0].data = tvocData;
+  tvocChart.update();
+
+  tempChart.data.labels = timeData;
+  tempChart.data.datasets[0].data = tempData;
+  tempChart.update();
+}
+
+/* ========= START ========= */
+document.addEventListener("DOMContentLoaded", () => {
+  initCharts();
+  setInterval(fetchLiveData, 1000);
+});
+
   
